@@ -13,5 +13,8 @@ const observable = new Observable(subscriber => {
     subscriber.next('XXX');
 });
 
-observable.subscribe(observer);
-
+observable.subscribe(
+    value => console.log('Next', value),
+    null,
+    () => console.log('Complete'),
+);

@@ -7,10 +7,9 @@ const observer = {
 }
 
 const observable = new Observable(subscriber => {
-    let count = 0;
+    let count = 1;
     const id = setInterval(() => {
         subscriber.next(count);
-        subscriber.complete();
         count ++;
     }, 1000);
     return () => {
@@ -19,7 +18,14 @@ const observable = new Observable(subscriber => {
     }
 });
 
-console.log('Before');
-observable.subscribe(observer);
-console.log('After');
+const sub1 = observable.subscribe(observer);
+const sub2 = observable.subscribe(observer);
 
+sub1.add(sub2);
+
+// Unsubscribing to sub1 unsubscribes to both sub1 and sub2
+// Unsubscribing to sub2 unsubscribes to only sub2
+setTimeout(() => {
+    sub1.unsubscribe();
+    // sub2.unsubscribe();
+}, 3500);

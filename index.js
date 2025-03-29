@@ -7,14 +7,19 @@ const observer = {
 }
 
 const observable = new Observable(subscriber => {
-    subscriber.next('Hello');
-    subscriber.next('World');
-    subscriber.complete();
-    subscriber.next('XXX');
+    let count = 0;
+    const id = setInterval(() => {
+        subscriber.next(count);
+        subscriber.complete();
+        count ++;
+    }, 1000);
+    return () => {
+        console.log('Clearing ID', id);
+        clearInterval(id);
+    }
 });
 
-observable.subscribe(
-    value => console.log('Next', value),
-    null,
-    () => console.log('Complete'),
-);
+console.log('Before');
+observable.subscribe(observer);
+console.log('After');
+

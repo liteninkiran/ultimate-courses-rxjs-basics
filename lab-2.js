@@ -1,5 +1,5 @@
 import { interval } from 'rxjs';
-import { scan, mapTo, filter } from 'rxjs/operators';
+import { scan, mapTo, filter, tap } from 'rxjs/operators';
 
 // Elements
 const countdown = document.getElementById('countdown');
@@ -20,7 +20,8 @@ const filterer = value => value >= 0;
 const obs$ = counter$.pipe(
         mapTo(-1),
         scan(reducer, 10),
-        filter(filterer),
+        tap(console.log),
+        filter(filterer), // Still emitting values from counter$
     );
 
 const sub = obs$.subscribe(setCountdown);

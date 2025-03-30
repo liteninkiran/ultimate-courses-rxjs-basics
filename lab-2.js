@@ -24,4 +24,4 @@ const obs$ = counter$.pipe(
         filter(filterer), // Still emitting values from counter$
     );
 
-const sub = obs$.subscribe(setCountdown);
+// const sub = obs$.subscribe(setCountdown);

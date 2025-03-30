@@ -1,22 +1,22 @@
 import { of, fromEvent } from 'rxjs';
-import { map, mapTo, pluck } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
-const source$ = of(1, 2, 3, 4, 5);
-
-const sourcePiped$ = source$.pipe(
-    map(x => x * 10)
-);
-
+// const source$ = of(1, 2, 3, 4, 5);
+// const filterFn = x => x > 2;
+// const filterSource = filter(filterFn);
+// const sourcePiped$ = source$.pipe(filterSource);
 // sourcePiped$.subscribe(console.log);
 
 const keyup$ = fromEvent(document, 'keyup');
-const keycode$ = keyup$.pipe(map(event => event.code));
-const keycodePlucked$ = keyup$.pipe(pluck('code'));
-const keycodePressed$ = keyup$.pipe(mapTo('Key Pressed'));
+const mapFn = event => event.code;
+const keyupMap = map(mapFn);
+const keycode$ = keyup$.pipe(keyupMap);
 
-// keyup$.subscribe(console.log);
 // keycode$.subscribe(console.log);
-// keycodePlucked$.subscribe(console.log);
-// keycodePressed$.subscribe(console.log);
 
+const filterFn = code => code === 'Enter' || x === 'NumpadEnter';
+const keycodeFilter = filter(filterFn);
+const enter$ = keycode$.pipe(keycodeFilter);
+
+enter$.subscribe(console.log);
 

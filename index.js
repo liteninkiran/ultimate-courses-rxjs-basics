@@ -1,4 +1,9 @@
-import { of, range } from 'rxjs';
+import { from } from 'rxjs';
+
+function* hello() {
+    yield 'Hello';
+    yield 'World';
+}
 
 const observer = {
     next: value => console.log(value),
@@ -6,9 +11,12 @@ const observer = {
     complete: () => console.log('Complete'),
 }
 
-const source1$ = of(1, 2, 3, 4, 5);
-const source2$ = range(1, 5);
+const url = 'https://api.github.com/users/octocat'
 
-// const sub1 = source1$.subscribe(observer);
-const sub2 = source1$.subscribe(observer);
+// const source = [1, 2, 3, 4, 5];
+// const source = 'Hello';
+// const source = fetch(url);
+const source = hello();
+const source$ = from(source);
 
+const sub = source$.subscribe(observer);

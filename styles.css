@@ -76,3 +76,16 @@ body {
     width: 0%;
     background: #ff16b7;
 }
+
+#countdown {
+    margin-top: 20px;
+    font-size: 32px;
+}
+
+#abort {
+    background: red;
+    color: white;
+    border-radius: 2px;
+    padding: 8px 16px;
+    margin-top: 10px;
+}

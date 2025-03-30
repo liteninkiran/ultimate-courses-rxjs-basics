@@ -22,7 +22,6 @@ import { scan, map, mapTo, takeWhile, tap } from 'rxjs/operators';
 
 // Elements
 const countdown = document.getElementById('countdown');
-const message = document.getElementById('message');
 
 // Streams
 const counter$ = interval(300);

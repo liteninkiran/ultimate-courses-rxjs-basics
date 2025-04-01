@@ -1,31 +1,40 @@
 import { fromEvent } from 'rxjs';
-import { debounceTime, pluck, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ajax } from 'rxjs/ajax';
 
-//elems
+// Elements
 const inputBox = document.getElementById('text-input');
 
-// streams
+// Streams
 const click$ = fromEvent(document, 'click');
 const input$ = fromEvent(inputBox, 'keyup');
 
-input$
-    .pipe(
-        /*
-         * debounceTime emits the last emitted value from the source 
-         * after a pause, based on a duration you specify.
-         * For instance, in this case when the user starts typing all values
-         * will be ignored until they paused for at least 200ms,
-         * at which point the last value will be emitted.
-         */
-        debounceTime(200),
-        // we could also use map here
-        pluck('target', 'value'),
-        /* 
-         * If the user types, then backspaces quickly, the same value could
-         * be emitted twice in a row. Using distinctUntilChanged will prevent
-         * this from happening.
-         */
-        distinctUntilChanged()
-    )
-    .subscribe(console.log);
+/*
+ * debounceTime emits the last emitted value from the source 
+ * after a pause, based on a duration you specify.
+ * For instance, in this case when the user starts typing all values
+ * will be ignored until they paused for at least 200ms,
+ * at which point the last value will be emitted.
+ */
 
+/* 
+ * If the user types, then backspaces quickly, the same value could
+ * be emitted twice in a row. Using distinctUntilChanged will prevent
+ * this from happening.
+ */
+
+const mapped = map(event => {
+    const term = event.target.value;
+    const url = `https://api.github.com/users/${term}`;
+    return ajax.getJSON(url);
+});
+const obs$ = input$.pipe(
+    debounceTime(1000),
+    mapped,
+    distinctUntilChanged(),
+);
+
+// Do not do this. Avoid nested subscriptions. Use mergeAll instead.
+obs$.subscribe(o$ => {
+    o$.subscribe(console.log);
+});

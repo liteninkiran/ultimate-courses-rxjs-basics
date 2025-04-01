@@ -1,22 +1,23 @@
-import { fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
+import { fromEvent, interval } from 'rxjs';
+import { mergeMap, takeUntil, map } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 
-// Elements
-const inputBox = document.getElementById('text-input');
+const interval$ = interval(100);
+const click$ = fromEvent(document, 'click');
 
-// Streams
-const input$ = fromEvent(inputBox, 'keyup');
+// const obs$ = click$.pipe(mergeMap(() => interval$));
+// obs$.subscribe(console.log);
 
-const mapped = mergeMap(event => {
-    const term = event.target.value;
-    const url = `https://api.github.com/users/${term}`;
-    return ajax.getJSON(url);
-});
-const obs$ = input$.pipe(
-    debounceTime(1000),
-    mapped,
-    distinctUntilChanged(),
-);
+// const mousedown$ = fromEvent(document, 'mousedown');
+// const mouseup$ = fromEvent(document, 'mouseup');
+// const mergeMapFn = () => interval$.pipe(takeUntil(mouseup$));
+// const mergeMapped = mergeMap(mergeMapFn);
+// const obs$ = mousedown$.pipe(mergeMapped);
+// obs$.subscribe(console.log);
 
-obs$.subscribe(console.log);
+const url = 'https://67ec078caa794fb3222c957b.mockapi.io/test/coords';
+const mapped = map((event) => ({ x: event.clientX, y: event.clientY}));
+const mergeMapped = mergeMap(coords => ajax.post(url, coords));
+const coordinates$ = click$.pipe(mapped);
+const coordinatesWithSave$ = coordinates$.pipe(mergeMapped);
+coordinatesWithSave$.subscribe(console.log);

@@ -139,3 +139,22 @@ body {
     color: white;
     border: 0;
 }
+
+#dog {
+    margin-top: 10px;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+#start,
+#stop {
+    color: white;
+}
+
+#start {
+    background: green;
+}
+
+#stop {
+    background: red;
+}

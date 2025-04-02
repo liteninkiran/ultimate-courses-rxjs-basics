@@ -186,3 +186,11 @@ button:hover {
 #start {
     background: green;
 }
+
+.input-wrapper {
+    margin-top: 20px;
+}
+
+.input-wrapper>input {
+    height: 30px;
+}

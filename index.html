@@ -15,7 +15,13 @@
         <div id="app">
             <h1>Ultimate RxJS</h1>
             <div class="progress-bar"></div>
-            <div>
+
+            <div class="input-wrapper">
+                <input type="number" id="first">
+                <input type="number" id="second">
+            </div>
+
+            <div style="display: none;">
                 <h2 id="countdown"></h2>
                 <button id="abort" style="display: none;">
                     Abort Mission
@@ -72,7 +78,7 @@
             </div>
             <img style="display: none;" id="dog" alt="dog!" src="https://random.dog/10fa025a-b04a-47d7-bfed-98747269b6c2.jpg" />
         </div>
-        <script src="js\combination-operators\merge.js"></script>
+        <script src="js\combination-operators\combineLatest.js"></script>
     </body>
 
 </html>

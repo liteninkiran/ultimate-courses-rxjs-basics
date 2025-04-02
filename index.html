@@ -15,6 +15,10 @@
         <div id="app">
             <h1>Ultimate RxJS</h1>
             <div class="progress-bar"></div>
+            <div>
+                <h2 id="countdown"></h2>
+                <button id="abort"> Abort Mission </button>
+            </div>
             <input type="text" id="text-input" style="display: none;">
             <div id="typeahead-container"></div>
             <div style="display: none;">
@@ -46,7 +50,7 @@
                 </div>
             </form>
 
-            <div>
+            <div style="display: none;">
                 <p>
                     Start polling to request random
                     <a href="https://random.dog/">dog</a> images!
@@ -58,9 +62,9 @@
                 <button id="start">Start Polling</button>
                 <button id="stop">Stop Polling</button>
             </div>
-            <img id="dog" alt="dog!" src="https://random.dog/10fa025a-b04a-47d7-bfed-98747269b6c2.jpg" />
+            <img style="display: none;" id="dog" alt="dog!" src="https://random.dog/10fa025a-b04a-47d7-bfed-98747269b6c2.jpg" />
         </div>
-        <script src="js\transformation-operators\lab-3.js"></script>
+        <script src="js\combination-operators\startWith.js"></script>
     </body>
 
 </html>

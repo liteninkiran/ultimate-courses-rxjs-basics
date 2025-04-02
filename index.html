@@ -17,7 +17,7 @@
             <div class="progress-bar"></div>
             <input type="text" id="text-input">
             <div id="typeahead-container"></div>
-            <div>
+            <div style="display: none;">
                 <div class="radio-container">
                     <input type="radio" class="radio-option" name="operator" value="mergeMap">
                     <label for="mergeMap">mergeMap</label>
@@ -32,8 +32,21 @@
                 </div>
             </div>
 
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" name="email" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" />
+                </div>
+                <div class="form-group">
+                    <button id="login" type="button">Login</button>
+                </div>
+            </form>
         </div>
-        <script src="js\concatMap.js"></script>
+        <script src="js\exhaustMap.js"></script>
     </body>
 
 </html>

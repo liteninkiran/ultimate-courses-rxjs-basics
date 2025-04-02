@@ -15,9 +15,17 @@
         <div id="app">
             <h1>Ultimate RxJS</h1>
             <div class="progress-bar"></div>
-            <div style="display: none;">
+            <div>
                 <h2 id="countdown"></h2>
-                <button id="abort"> Abort Mission </button>
+                <button id="abort" style="display: none;">
+                    Abort Mission
+                </button>
+                <button id="start">
+                    Start Timer
+                </button>
+                <button id="pause">
+                    Pause Timer
+                </button>
             </div>
             <input type="text" id="text-input" style="display: none;">
             <div id="typeahead-container"></div>
@@ -64,7 +72,7 @@
             </div>
             <img style="display: none;" id="dog" alt="dog!" src="https://random.dog/10fa025a-b04a-47d7-bfed-98747269b6c2.jpg" />
         </div>
-        <script src="js\combination-operators\concat.js"></script>
+        <script src="js\combination-operators\merge.js"></script>
     </body>
 
 </html>
